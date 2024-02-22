@@ -60,6 +60,21 @@ public class Pet
         happiness++;
     }
 
+    public void GetHungry()
+    {
+        hunger-=5;
+    }
+
+    public void GetTired()
+    {
+        energy-=5;
+    }
+
+    public void GetBored()
+    {
+        happiness-=5;
+    }
+
     public Pet(string petName)
     {
         name = petName;
