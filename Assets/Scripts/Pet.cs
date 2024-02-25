@@ -47,39 +47,60 @@ public class Pet
 
     public void Eat()
     {
-        hunger++;
+        if (hunger < 97)
+        {
+            hunger += 3;
+        }
     }
 
     public void Rest()
     {
-        energy++;
+        if (energy < 93)
+        {
+            energy += 7;
+        }
     }
 
     public void Play()
     {
-        happiness++;
+        if (happiness < 95)
+        {
+            happiness += 5;
+        }
     }
 
     public void GetHungry()
     {
         hunger-=5;
+        if (hunger < 0)
+        {
+            hunger = 0;
+        }
     }
 
     public void GetTired()
     {
-        energy-=5;
+        energy-=3;
+        if (energy < 0)
+        {
+            energy = 0;
+        }
     }
 
     public void GetBored()
     {
-        happiness-=5;
+        happiness-=10;
+        if (happiness < 0)
+        {
+            happiness = 0;
+        }
     }
 
     public Pet(string petName)
     {
         name = petName;
-        hunger = 100;
-        energy = 100;
-        happiness = 100;
+        hunger = 70;
+        energy = 70;
+        happiness = 70;
     }
 }

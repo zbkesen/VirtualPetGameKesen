@@ -16,11 +16,14 @@ public class GameController : MonoBehaviour
     [SerializeField] private Button playVP;
     [SerializeField] private Button feedVP;
     [SerializeField] private Button restVP;
+    [SerializeField] private Button adoptNew;
+    [SerializeField] private Button quitGame;
     [SerializeField] private Image pixelDog;
     [SerializeField] private Image pixelCat;
     private Pet virtualPet;
     private float timePassed = 0f;
     private bool gameStart;
+    private bool gameOver = false;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +44,7 @@ public class GameController : MonoBehaviour
     void FixedUpdate()
     {
         VPStatDegrade();
+        GameEnd();
     }
 
     void PetName()
@@ -91,7 +95,7 @@ public class GameController : MonoBehaviour
         if (gameStart == true)
         {
             timePassed += Time.deltaTime;
-            if (timePassed > 5f)
+            if (timePassed > 2f)
             {
                 virtualPet.GetHungry();
                 hungerLevel.text = ($"Hunger: {virtualPet.Hunger.ToString()}");
@@ -100,6 +104,60 @@ public class GameController : MonoBehaviour
                 virtualPet.GetBored();
                 happyLevel.text = ($"Happiness: {virtualPet.Happiness.ToString()}");
                 timePassed = 0;
+            }
+
+            if (virtualPet.Hunger > 70)
+            {
+                hungerLevel.color = Color.green;
+            }
+            else if (virtualPet.Hunger > 30 && virtualPet.Hunger < 70)
+            {
+                hungerLevel.color = Color.yellow;
+            }
+            else if (virtualPet.Hunger > 0 && virtualPet.Hunger < 30)
+            {
+                hungerLevel.color = Color.red;
+            }
+            else if (virtualPet.Hunger == 0)
+            {
+                gameStart = false;
+                gameOver = true;
+            }
+
+            if (virtualPet.Happiness > 70)
+            {
+                happyLevel.color = Color.green;
+            }
+            else if (virtualPet.Happiness > 30 && virtualPet.Happiness < 70)
+            {
+                happyLevel.color = Color.yellow;
+            }
+            else if (virtualPet.Happiness > 0 && virtualPet.Happiness < 30)
+            {
+                happyLevel.color = Color.red;
+            }
+            else if (virtualPet.Happiness == 0)
+            {
+                gameStart = false;
+                gameOver = true;
+            }
+
+            if (virtualPet.Energy > 70)
+            {
+                energyLevel.color = Color.green;
+            }
+            else if (virtualPet.Energy > 30 && virtualPet.Energy < 70)
+            {
+                energyLevel.color = Color.yellow;
+            }
+            else if (virtualPet.Energy > 0 && virtualPet.Energy < 30)
+            {
+                energyLevel.color = Color.red;
+            }
+            else if (virtualPet.Energy == 0)
+            {
+                gameStart = false;
+                gameOver = true;
             }
         }
     }
@@ -117,6 +175,8 @@ public class GameController : MonoBehaviour
         happyLevel.gameObject.SetActive(false);
         hungerLevel.gameObject.SetActive(false);
         energyLevel.gameObject.SetActive(false);
+        adoptNew.gameObject.SetActive(false);
+        quitGame.gameObject.SetActive(false);
     }
 
     void SwitchHUD()
@@ -131,5 +191,18 @@ public class GameController : MonoBehaviour
         happyLevel.gameObject.SetActive(true);
         energyLevel.gameObject.SetActive(true);
         hungerLevel.gameObject.SetActive(true);
+    }
+
+    void GameEnd()
+    {
+        if (gameOver == true)
+        {
+            playVP.interactable = false;
+            feedVP.interactable = false;
+            restVP.interactable = false;
+            petName.text = ($"Animal Control has taken away {virtualPet.Name} because you didn't take care of them. You can adopt a new pet.. hopefully this one is better taken care of.");
+            adoptNew.gameObject.SetActive(true);
+            quitGame.gameObject.SetActive(true);
+        }
     }
 }
