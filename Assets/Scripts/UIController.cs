@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Virtual Pet
+//Name: Zarek Kesen
+//Section: SGD.213.2172
+//Instructor: Brian Sowers
+//Date: 02/26/2024
+/////////////////////////////////////////////
 
 public class UIController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnClickQuitButton()
     {
-        
+        Debug.Log("Quit button clicked.");
+        Application.Quit();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnClickPlayButton()
     {
-        
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void OnClickAdoptNewButton()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 }

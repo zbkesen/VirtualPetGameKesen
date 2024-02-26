@@ -4,6 +4,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//////////////////////////////////////////////
+//Assignment/Lab/Project: Virtual Pet
+//Name: Zarek Kesen
+//Section: SGD.213.2172
+//Instructor: Brian Sowers
+//Date: 02/26/2024
+/////////////////////////////////////////////
+
+
 public class GameController : MonoBehaviour
 {
     [SerializeField] private TMP_InputField nameInput;
@@ -95,7 +104,7 @@ public class GameController : MonoBehaviour
         if (gameStart == true)
         {
             timePassed += Time.deltaTime;
-            if (timePassed > 2f)
+            if (timePassed > 1f)
             {
                 virtualPet.GetHungry();
                 hungerLevel.text = ($"Hunger: {virtualPet.Hunger.ToString()}");
